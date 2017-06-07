@@ -1,0 +1,20 @@
+{
+    "name": "ebisbe/pagarMasTarde-omnipay",
+    "type": "symfony-bundle",
+    "description": "Pagar Mas Tarde payment gateway implementation with omnipay",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Enric Bisbe Gil",
+            "email": "enric@bikebitants.com",
+            "homepage": "http://github.com/ebisbe"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "omnipay/common": "2.*"
+    },
+    "autoload": {
+        "psr-4": { "Omnipay\\PagarMasTarde\\": "src/" }
+    }
+}
