@@ -16,17 +16,7 @@ class Gateway extends AbstractGateway
 
     public function getDefaultParameters()
     {
-        return array(
-            'titular' => '',
-            'consumerLanguage' => '001',
-            'currency' => '978',
-            'terminal' => '001',
-            'merchantURL' => '',
-            'merchantName' => '',
-            'transactionType' => '0',
-            'signatureMode' => 'simple',
-            'testMode' => false
-        );
+        return array();
     }
 
     public function getName()
