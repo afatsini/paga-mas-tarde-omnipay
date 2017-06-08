@@ -15,7 +15,7 @@ class PurchaseRequest extends AbstractRequest
     public function getData()
     {
         $data = array(
-            "account_id" => $this->getAccountId(),
+            "account_id" => $this->getParameter('account_id'),
             "currency" => $this->getCurrency(),
             "ok_url" => $this->getReturnUrl(),
             "nok_url" => $this->getReturnUrl(),
@@ -23,8 +23,8 @@ class PurchaseRequest extends AbstractRequest
             "order_id" => $this->getTransactionId(),
             "amount" => $this->getAmount(),
             "description" => $this->getDescription(),
-            "locale" => $this->getLocale(),
-            "iframe" => $this->getIframe(),
+            "locale" => $this->getParameter('locale'),
+            "iframe" => $this->getParameter('iframe'),
         );
 
         $data['signature'] = $this->generateSignature($data);
@@ -39,7 +39,7 @@ class PurchaseRequest extends AbstractRequest
 
     protected function generateSignature($data)
     {
-        $text_to_encode = $this->getSecretKey().
+        $text_to_encode = $this->getParameter('secret_key').
             $data['account_id'].
             $data['order_id'].
             $data['amount'].
@@ -51,23 +51,23 @@ class PurchaseRequest extends AbstractRequest
         return hash('sha512', $text_to_encode);
     }
 
-    private function getLocale()
+    public function setLocale($value)
     {
-        return $this->getParameter('locale');
+        return $this->setParameter('locale', $value);
     }
 
-    private function getIframe()
+    public function setIframe($value)
     {
-        return $this->getParameter('iframe');
+        return $this->setParameter('iframe', $value);
     }
 
-    private function getAccountId()
+    public function setAccountId($value)
     {
-        return $this->getParameter('account_id');
+        return $this->setParameter('accound_id', $value);
     }
 
-    private function getSecretKey()
+    public function setSecretKey($value)
     {
-        return $this->getParameter('secret_key');
+        return $this->setParameter('secret_key', $value);
     }
 }
