@@ -25,6 +25,8 @@ class PurchaseRequest extends AbstractRequest
             "description" => $this->getDescription(),
             "locale" => $this->getParameter('locale'),
             "iframe" => $this->getParameter('iframe'),
+            'full_name' => $this->getParameter('full_name'),
+            'email' => $this->getParameter('email')
         );
 
         $data['signature'] = $this->generateSignature($data);
@@ -63,11 +65,21 @@ class PurchaseRequest extends AbstractRequest
 
     public function setAccountId($value)
     {
-        return $this->setParameter('accound_id', $value);
+        return $this->setParameter('account_id', $value);
     }
 
     public function setSecretKey($value)
     {
         return $this->setParameter('secret_key', $value);
+    }
+
+    public function setFullName($value)
+    {
+        return $this->setParameter('full_name', $value);
+    }
+
+    public function setEmail($value)
+    {
+        return $this->getParameter('email', $value);
     }
 }
