@@ -23,12 +23,12 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
 
     public function getRedirectUrl()
     {
-        return 'https://api.pagantis.com/api/1/charges';
+        return 'https://form.pagamastarde.com/form/' . $this->data['signature'];
     }
 
     public function getRedirectMethod()
     {
-        return 'POST';
+        return 'GET';
     }
 
     public function getRedirectData()
