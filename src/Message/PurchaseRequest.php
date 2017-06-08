@@ -80,6 +80,6 @@ class PurchaseRequest extends AbstractRequest
 
     public function setEmail($value)
     {
-        return $this->getParameter('email', $value);
+        return $this->setParameter('email', $value);
     }
 }
