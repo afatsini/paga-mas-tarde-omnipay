@@ -22,4 +22,9 @@ trait Parameters {
     {
         return $this->setParameter('secret_key', $value);
     }
+
+    public function setCallbackUrl($value)
+    {
+        return $this->setParameter('callback_url', $value);
+    }
 }

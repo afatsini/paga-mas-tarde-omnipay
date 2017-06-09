@@ -30,6 +30,11 @@ class PurchaseRequest extends AbstractRequest
             'email' => $this->getParameter('email')
         );
 
+        if($this->getParameter('callback_url'))
+        {
+            $data['callback_url'] = $this->getParameter('callback_url');
+        }
+
         $data['signature'] = $this->generateSignature($data);
 
         return $data;
