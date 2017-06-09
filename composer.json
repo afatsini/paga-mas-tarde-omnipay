@@ -1,5 +1,5 @@
 {
-    "name": "ebisbe/pagaMasTarde-omnipay",
+    "name": "ebisbe/paga-mas-tarde-omnipay",
     "type": "symfony-bundle",
     "description": "Paga Mas Tarde payment gateway implementation with omnipay",
     "license": "GPLv2",
