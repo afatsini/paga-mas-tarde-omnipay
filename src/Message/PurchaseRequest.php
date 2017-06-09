@@ -1,16 +1,17 @@
 <?php
 
-namespace Omnipay\PagarMasTarde\Message;
+namespace Omnipay\PagaMasTarde\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\PagaMasTarde\Traits\Parameters;
+use Omnipay\PagaMasTarde\Traits\Signature;
 
 /**
- * Sermepa (Redsys) Purchase Request
- *
- * @author Javier Sampedro <jsampedro77@gmail.com>
+ * Paga+Tarde Purchase Request
  */
 class PurchaseRequest extends AbstractRequest
 {
+    use Parameters, Signature;
 
     public function getData()
     {
@@ -39,40 +40,6 @@ class PurchaseRequest extends AbstractRequest
         return $this->response = new PurchaseResponse($this, $data);
     }
 
-    protected function generateSignature($data)
-    {
-        $text_to_encode = $this->getParameter('secret_key').
-            $data['account_id'].
-            $data['order_id'].
-            $data['amount'].
-            $data['currency'].
-            $data['ok_url'].
-            $data['nok_url'].
-            $data['cancelled_url'];
-
-        return hash('sha512', $text_to_encode);
-    }
-
-    public function setLocale($value)
-    {
-        return $this->setParameter('locale', $value);
-    }
-
-    public function setIframe($value)
-    {
-        return $this->setParameter('iframe', $value);
-    }
-
-    public function setAccountId($value)
-    {
-        return $this->setParameter('account_id', $value);
-    }
-
-    public function setSecretKey($value)
-    {
-        return $this->setParameter('secret_key', $value);
-    }
-
     public function setFullName($value)
     {
         return $this->setParameter('full_name', $value);
@@ -81,5 +48,18 @@ class PurchaseRequest extends AbstractRequest
     public function setEmail($value)
     {
         return $this->setParameter('email', $value);
+    }
+
+    public function setMultiply($multiply)
+    {
+        return $this->setParameter('multiply', $multiply);
+    }
+
+    public function getAmount()
+    {
+        if($this->getParameter('multiply')) {
+            return (float)parent::getAmount() * 100;
+        }
+        return (float)parent::getAmount();
     }
 }

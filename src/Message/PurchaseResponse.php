@@ -1,12 +1,12 @@
 <?php
 
-namespace Omnipay\PagarMasTarde\Message;
+namespace Omnipay\PagaMasTarde\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
- * Sermepa (Redsys) Purchase Response
+ * Paga+Tarde Purchase Response
  */
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {

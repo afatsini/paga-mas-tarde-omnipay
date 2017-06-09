@@ -1,7 +1,7 @@
 {
-    "name": "ebisbe/pagarMasTarde-omnipay",
+    "name": "ebisbe/pagaMasTarde-omnipay",
     "type": "symfony-bundle",
-    "description": "Pagar Mas Tarde payment gateway implementation with omnipay",
+    "description": "Paga Mas Tarde payment gateway implementation with omnipay",
     "license": "GPLv2",
     "authors": [
         {
@@ -15,6 +15,6 @@
         "omnipay/common": "2.*"
     },
     "autoload": {
-        "psr-4": { "Omnipay\\PagarMasTarde\\": "src/" }
+        "psr-4": { "Omnipay\\PagaMasTarde\\": "src/" }
     }
 }
