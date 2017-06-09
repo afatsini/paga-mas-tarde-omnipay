@@ -1,4 +1,4 @@
-Omnipay: RedSys
+Omnipay: Paga+Tarde
 ===============
 
 **[Paga+Tarde](http://docs.pagamastarde.com/)  driver for the Omnipay PHP payment processing library**
