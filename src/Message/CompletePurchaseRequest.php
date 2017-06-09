@@ -1,8 +1,9 @@
 <?php
+
 namespace Omnipay\PagaMasTarde\Message;
+
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\PagaMasTarde\Traits\Parameters;
-use Omnipay\PagaMasTarde\Traits\Signature;
 use Omnipay\PagaMasTarde\Exception\BadSignatureException;
 
 /**
@@ -10,13 +11,13 @@ use Omnipay\PagaMasTarde\Exception\BadSignatureException;
  */
 class CompletePurchaseRequest extends AbstractRequest
 {
-    use Parameters, Signature;
+    use Parameters;
 
     public function getData()
     {
         $data = $this->httpRequest->getContent();
 
-        if(!$this->checkSignature($data['data'], $data['signature'])) {
+        if (!$this->checkSignature($data['data'], $data['signature'])) {
             throw new BadSignatureException();
         }
 
@@ -32,5 +33,14 @@ class CompletePurchaseRequest extends AbstractRequest
     {
         $signature = $this->generateSignature($data);
         return $signature == $expectedSignature;
+    }
+
+    public function generateSignature($notification)
+    {
+        return sha1($this->getParameter('secret_key')
+            . $notification['account_id']
+            . $notification['api_version']
+            . $notification['event']
+            . $notification['data']['id']);
     }
 }

@@ -4,14 +4,13 @@ namespace Omnipay\PagaMasTarde\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\PagaMasTarde\Traits\Parameters;
-use Omnipay\PagaMasTarde\Traits\Signature;
 
 /**
  * Paga+Tarde Purchase Request
  */
 class PurchaseRequest extends AbstractRequest
 {
-    use Parameters, Signature;
+    use Parameters;
 
     public function getData()
     {
@@ -38,6 +37,25 @@ class PurchaseRequest extends AbstractRequest
         $data['signature'] = $this->generateSignature($data);
 
         return $data;
+    }
+
+    protected function generateSignature($data)
+    {
+        $text_to_encode = $this->getParameter('secret_key') .
+            $data['account_id'] .
+            $data['order_id'] .
+            $data['amount'] .
+            $data['currency'] .
+            $data['ok_url'] .
+            $data['nok_url'];
+
+        if (!empty($data['callback_url']))
+            $text_to_encode .= $data['callback_url'];
+
+        if (!empty($data['cancelled_url']))
+            $text_to_encode .= $data['cancelled_url'];
+
+        return hash('sha512', $text_to_encode);
     }
 
     public function sendData($data)
