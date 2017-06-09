@@ -5,6 +5,7 @@ namespace Omnipay\PagaMasTarde\Message;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\PagaMasTarde\Traits\Parameters;
 use Omnipay\PagaMasTarde\Exception\BadSignatureException;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Paga+Tarde Complete Purchase Request
@@ -15,7 +16,8 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function getData()
     {
-        $data = json_decode($this->httpRequest->getContent(), true);
+        $request = Request::createFromGlobals();
+        $data = json_decode($request->getContent(), true);
 
         if (!$this->checkSignature($data['data'], $data['signature'])) {
             throw new BadSignatureException();
