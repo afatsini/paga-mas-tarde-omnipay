@@ -15,7 +15,7 @@ class CompletePurchaseRequest extends AbstractRequest
 
     public function getData()
     {
-        $data = $this->httpRequest->getContent();
+        $data = json_decode($this->httpRequest->getContent(), true);
 
         if (!$this->checkSignature($data['data'], $data['signature'])) {
             throw new BadSignatureException();
