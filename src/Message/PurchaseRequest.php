@@ -29,8 +29,7 @@ class PurchaseRequest extends AbstractRequest
             'email' => $this->getParameter('email')
         );
 
-        if($this->getParameter('callback_url'))
-        {
+        if ($this->getParameter('callback_url')) {
             $data['callback_url'] = $this->getParameter('callback_url');
         }
 
@@ -49,11 +48,13 @@ class PurchaseRequest extends AbstractRequest
             $data['ok_url'] .
             $data['nok_url'];
 
-        if (!empty($data['callback_url']))
+        if (!empty($data['callback_url'])) {
             $text_to_encode .= $data['callback_url'];
+        }
 
-        if (!empty($data['cancelled_url']))
+        if (!empty($data['cancelled_url'])) {
             $text_to_encode .= $data['cancelled_url'];
+        }
 
         return hash('sha512', $text_to_encode);
     }
@@ -80,7 +81,7 @@ class PurchaseRequest extends AbstractRequest
 
     public function getAmount()
     {
-        if($this->getParameter('multiply')) {
+        if ($this->getParameter('multiply')) {
             return (float)parent::getAmount() * 100;
         }
         return (float)parent::getAmount();

@@ -1,7 +1,8 @@
 <?php
 namespace Omnipay\PagaMasTarde\Traits;
 
-trait Parameters {
+trait Parameters
+{
 
     public function setLocale($value)
     {
